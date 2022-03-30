@@ -28,6 +28,20 @@
                     <Frame BorderColor="Gray" Padding="10">
                         <Entry Text="{Binding Organizacion}"/>
                     </Frame>
+                    <Grid ColumnDefinitions="auto, auto">
+                        <Button Grid.Column="0" Text="+"
+                                FontSize="15"
+                                FontAttributes="Bold"
+                                BackgroundColor="DeepSkyBlue"
+                                BorderRadius="12"
+                                TextColor="White"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="35"
+                                HeightRequest="35"
+                                Command="{Binding BindingContext.cmdContactoAgregaTelefono, Source={x:Reference thisContactoMatto}}"/>
+                        <Label Grid.Column="1" Text="Telefono(s)" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    </Grid>
                     <Label Text="Telefono(s)"/>
                     <Frame BorderColor="Gray" VerticalOptions="Start" Padding="10">
                         <CollectionView ItemsSource="{Binding Telefonos}">
@@ -35,8 +49,21 @@
                                 <DataTemplate x:DataType="model:Telefono">
                                     <StackLayout>
                                         <Label Text="Numero"/>
-                                        <Frame BorderColor="Gray">
-                                            <Entry Text="{Binding Numero}"/>
+                                        <Frame BorderColor="Black">
+                                            <Grid ColumnDefinitions="*, auto">
+                                                <Entry Grid.Column="0" Text="{Binding Numero}" HorizontalOptions="FillAndExpand"/>
+                                                <Label Grid.Column="1" Text="X" BackgroundColor="Black"
+                                                       TextColor="White"
+                                                       FontAttributes="Bold"
+                                                       HorizontalOptions="EndAndExpand"
+                                                       VerticalOptions="Center">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding BindingContext.cmdContactoEliminaTelefono, Source={x:Reference thisContactoMatto}}"
+                                                                              CommandParameter="{Binding . }"/>
+                                                    </Label.GestureRecognizers>
+                                                    
+                                                </Label>
+                                            </Grid>                                            
                                         </Frame>
                                     </StackLayout>
                                 </DataTemplate>
