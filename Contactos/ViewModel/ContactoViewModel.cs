@@ -15,6 +15,10 @@ namespace Contactos.ViewModel
         #region Propiedades
         public ObservableCollection<Contacto> Contactos { get; set; }
         #endregion
+
+        public ObservableCollection<Contacto> Favoritos { get; set; }
+        public ObservableCollection<Contacto> Favoritos2 { get; set; }
+
         private Contacto contacto;
         public Contacto Contacto
         {
@@ -30,9 +34,17 @@ namespace Contactos.ViewModel
         public ICommand cmdContactoAgrega { get; set; }
         public ICommand cmdContactoAgregaTelefono { get; set; }
         public ICommand cmdContactoEliminaTelefono { get; set; }
+        public ICommand cmdContactoFavorito { get; set; }
+        public ICommand cmdContactoPantallaFavoritos { get; set; }
         public ContactoViewModel()
         {
             Contactos = new ObservableCollection<Contacto>();
+
+            //Colección de favoritos
+            Favoritos = new ObservableCollection<Contacto>();
+            Favoritos2 = new ObservableCollection<Contacto>();
+
+
             Contactos.Add(new Contacto()
             {
                 Id = Guid.NewGuid().ToString(),
@@ -40,6 +52,7 @@ namespace Contactos.ViewModel
                 ApellidoPaterno = "Iglesias",
                 ApellidoMaterno = "Alcaraz",
                 Organizacion = "Facultad de Telemática",
+                Favorito = false,
                 Telefonos = new ObservableCollection<Telefono>() {
                     new Telefono{Id= Guid.NewGuid().ToString(), Numero="3141211713" },
                     new Telefono{Id= Guid.NewGuid().ToString(), Numero="3141414144" }
@@ -66,6 +79,8 @@ namespace Contactos.ViewModel
             cmdContactoAgrega = new Command(async () => await PCmdContactoAgrega());
             cmdContactoAgregaTelefono = new Command(async () => await PCmdContactoAgregaTelefono());
             cmdContactoEliminaTelefono = new Command<Telefono>(async (x) => await PCmdContactoEliminaTelefono(x));
+            cmdContactoFavorito = new Command<Contacto>(async (x) => await PCmdContactoFavorito(x));
+            cmdContactoPantallaFavoritos = new Command(async () => await PCmdContactoPantallaFavoritos());
 
             async Task PCmdContactoDetalle(Model.Contacto _Contacto)
             {
@@ -91,6 +106,8 @@ namespace Contactos.ViewModel
                 int indice = Contactos.IndexOf(_Contacto);
                 if (indice >= 0)
                 {
+                    _Contacto.Favorito = false;
+                    Favoritos.Remove(_Contacto);
                     Contactos.Remove(_Contacto);
                     OnPropertyChanged();
                 }
@@ -129,13 +146,57 @@ namespace Contactos.ViewModel
                 
                 await Application.Current.MainPage.Navigation.PopAsync();
                 await Application.Current.MainPage.Navigation.PopAsync();
+                await Application.Current.MainPage.Navigation.PopAsync();
+
             }
-        
+
             async Task PCmdContactoEliminaTelefono(Model.Telefono _Telefono)
             {
                 Contacto.Telefonos.Remove(_Telefono);
                 await Task.Delay(1000);
             }
+
+            async Task PCmdContactoFavorito(Model.Contacto _Contacto)
+            {
+                Console.WriteLine(_Contacto);
+                if (!_Contacto.Favorito)
+                {
+                    _Contacto.Favorito = true;
+                    Favoritos.Add(_Contacto);
+                }
+                else
+                {
+                    _Contacto.Favorito = false;
+                    Favoritos.Remove(_Contacto);
+                }
+
+                OnPropertyChanged();
+                Console.WriteLine(Favoritos.Count);
+                await Task.Delay(1000);
+
+               
+                //if (!_Contacto.Favorito)
+                //{
+                //    _Contacto.Favorito = true;
+                //}
+                //else
+                //{
+                //    _Contacto.Favorito = false;
+                //}
+
+
+            }
+
+            async Task PCmdContactoPantallaFavoritos()
+            {
+                //Favoritos2 = new ObservableCollection<Contacto>(Contactos.Where((Contacto) => Contacto.Favorito.Equals(true)));
+
+
+                await Application.Current.MainPage.Navigation.PushAsync(new View.ContactoFavoritos(this));
+                Console.WriteLine(Favoritos.Count);
+
+            }
+
         }
     }
 }

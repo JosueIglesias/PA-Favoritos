@@ -12,6 +12,7 @@ namespace Contactos.Model
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
         public string Organizacion { get; set; }
+        public bool Favorito { get; set; }
         public ObservableCollection<Telefono> Telefonos { get; set; }
 
     }
