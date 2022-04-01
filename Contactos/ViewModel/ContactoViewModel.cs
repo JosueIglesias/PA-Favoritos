@@ -64,7 +64,7 @@ namespace Contactos.ViewModel
                 Nombre = "Giancarlo",
                 ApellidoPaterno = "Garcia",
                 ApellidoMaterno = "Rivera",
-                Organizacion = "Facultad de Ingeniería Cvil",
+                Organizacion = "Facultad de Ingeniería Civil",
                 Telefonos = new ObservableCollection<Telefono>() {
                     new Telefono{Id= Guid.NewGuid().ToString(), Numero="3121111111" },
                     new Telefono{Id= Guid.NewGuid().ToString(), Numero="3122222222" }

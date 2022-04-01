@@ -4,7 +4,7 @@
              xmlns:model="clr-namespace:Contactos.Model"
              x:Class="Contactos.View.ContactoMatto"
              Title="MANTENIMIENTO DE CONTACTO"
-             BackgroundColor="White"
+             BackgroundColor="#E7ECEF"
              x:Name="thisContactoMatto">
     <ContentPage.Content>
         <Grid RowDefinitions="*,auto">
@@ -32,8 +32,8 @@
                         <Button Grid.Column="0" Text="+"
                                 FontSize="15"
                                 FontAttributes="Bold"
-                                BackgroundColor="DeepSkyBlue"
-                                BorderRadius="12"
+                                BackgroundColor="#6096BA"
+                                BorderRadius="20"
                                 TextColor="White"
                                 HorizontalOptions="CenterAndExpand"
                                 VerticalOptions="CenterAndExpand"
@@ -75,10 +75,16 @@
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
                 <Button Text="Cancelar" Command="{Binding BindingContext.cmdContactoCancelar, Source={x:Reference thisContactoMatto}}"
                         CommandParameter="{Binding BindingContext.Contacto, Source={x:Reference thisContactoMatto}}"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center"
+                        CornerRadius="20"
+                        BackgroundColor="#6096BA"
+                        TextColor="#E7ECEF"/>
                 <Button Text="Grabar" Command="{Binding BindingContext.cmdContactoGrabar, Source={x:Reference thisContactoMatto}}" 
                         CommandParameter="{Binding BindingContext.Contacto, Source={x:Reference thisContactoMatto}}"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center"
+                        CornerRadius="20"
+                        BackgroundColor="#6096BA"
+                        TextColor="#E7ECEF"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

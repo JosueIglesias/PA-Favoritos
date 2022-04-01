@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Contactos.Model"
-             BackgroundColor="White"
+             BackgroundColor="#E7ECEF"
              Title="CONTACTO DETALLE"
              x:Class="Contactos.View.ContactoDetalle"
              x:Name="thisContactoDetalle">
@@ -48,10 +48,16 @@
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center">
                 <Button Text="Eliminar" Command="{Binding BindingContext.cmdContactoElimina, Source={x:Reference thisContactoDetalle}}"
                         CommandParameter="{Binding BindingContext.Contacto, Source={x:Reference thisContactoDetalle}}"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center"
+                        CornerRadius="20"
+                        BackgroundColor="#6096BA"
+                        TextColor="#E7ECEF"/>
                 <Button Text="Modificar" Command="{Binding BindingContext.cmdContactoEdita, Source={x:Reference thisContactoDetalle}}"
                         CommandParameter="{Binding BindingContext.Contacto, Source={x:Reference thisContactoDetalle}}"
-                        HorizontalOptions="Center"/>
+                        HorizontalOptions="Center"
+                        CornerRadius="20"
+                        BackgroundColor="#6096BA"
+                        TextColor="#E7ECEF"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
